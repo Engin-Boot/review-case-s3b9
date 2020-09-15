@@ -5,12 +5,10 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) throws IOException{
 		
-		//System.out.println(args[0]);
 		
 		List<String> reviewsList = null;
 		
-			
-			reviewsList = ReadReviewsCsv.reviewCsvReader(FileFetcher.readCsvfileNameFromProperties(), args[0]);
+		reviewsList = ReadReviewsCsv.reviewCsvReader(FileFetcher.readCsvfileNameFromProperties(), args[0]);
 		
 		ConsoleWriter.writeReviewsOnConsole(reviewsList);
 		
