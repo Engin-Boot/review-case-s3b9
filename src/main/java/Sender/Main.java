@@ -3,6 +3,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
+	
+	public static void WriteReviews(List<String> reviews) {
+		ConsoleWriter.writeReviewsOnConsole(reviews);
+	}
 	public static void main(String[] args) throws IOException{
 		
 		
@@ -10,7 +14,7 @@ public class Main {
 		
 		reviewsList = ReadReviewsCsv.reviewCsvReader(FileFetcher.readCsvfileNameFromProperties(), args[0]);
 		
-		ConsoleWriter.writeReviewsOnConsole(reviewsList);
+		WriteReviews(reviewsList);
 		
 	}
 
