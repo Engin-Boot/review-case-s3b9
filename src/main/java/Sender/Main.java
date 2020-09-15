@@ -4,17 +4,20 @@ import java.util.List;
 
 public class Main {
 	
-	public static void WriteReviews(List<String> reviews) {
-		ConsoleWriter.writeReviewsOnConsole(reviews);
-	}
-	public static void main(String[] args) throws IOException{
+
+	public static void main(String[] args){
 		
 		
 		List<String> reviewsList = null;
 		
-		reviewsList = ReadReviewsCsv.reviewCsvReader(FileFetcher.readCsvfileNameFromProperties(), args[0]);
+		try {
+			reviewsList = ReadReviewsCsv.reviewCsvReader(FileFetcher.readCsvfileNameFromProperties(), args[0]);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		WriteReviews(reviewsList);
+		ConsoleWriter.writeReviewsOnConsole(reviewsList);
 		
 	}
 
