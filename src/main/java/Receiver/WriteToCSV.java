@@ -1,31 +1,33 @@
 package Receiver;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.opencsv.CSVWriter;
-
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class WriteToCSV {
 	public static void writeWordCountToCSV(Map<String,Integer> wordCount) throws IOException{
 		Set<String> wordSet=new TreeSet<String>();
 		wordSet=wordCount.keySet();
-		List<String[]> data=new ArrayList<String[]>();
-		data.add(new String[] {"Word","Count"});
+		String str="Word,Count\n";
 		for(String word:wordSet){
 			System.out.println(word +" : "+ wordCount.get(word));
-			data.add(new String[] {word,Integer.toString(wordCount.get(word))});
+			str=str+word+","+Integer.toString(wordCount.get(word))+"\n";
 		}
-		File file = new File("D:\\BootCamp\\review-case-s3b9\\target\\classes\\example.csv");
-		FileWriter outputFile=new FileWriter(file);
-		CSVWriter csvWriter=new CSVWriter(outputFile);
-		csvWriter.writeAll(data);
-		csvWriter.close();
+       
+		PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(new File("NewData.csv"));
+        } catch (FileNotFoundException e) {
+        	e.getMessage();
+            e.printStackTrace();
+        }
+        pw.println(str);
+        pw.flush();
+        pw.close();
 	}
 }

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
-
 public class WordCount {
 	public static Map<String,Integer> wordCount=new HashMap<String,Integer>();
 	public static Set<String> Tokenizer(String review){
@@ -19,6 +18,7 @@ public class WordCount {
 	}
 	public static void countOccuranceOfWord(String review) {
 		Set<String> wordSet=new TreeSet<String>();
+		review=review.replaceAll("[\\p{Punct}&&[^/]]+", "").toLowerCase();
 		wordSet=Tokenizer(review);
 		for(String word:wordSet){
 			if(!wordCount.containsKey(word)) {

@@ -1,4 +1,4 @@
-Sender\ConsoleWriter.class
-Sender\FileFetcher.class
 Sender\Main.class
 Sender\ReadReviewsCsv.class
+Sender\ConsoleWriter.class
+Sender\FileFetcher.class
