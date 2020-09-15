@@ -8,13 +8,10 @@ public class Main {
 		//System.out.println(args[0]);
 		
 		List<String> reviewsList = null;
-		try {
+		
 			
 			reviewsList = ReadReviewsCsv.reviewCsvReader(FileFetcher.readCsvfileNameFromProperties(), args[0]);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		ConsoleWriter.writeReviewsOnConsole(reviewsList);
 		
 	}
