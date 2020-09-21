@@ -1,16 +1,21 @@
 package Receiver;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 public class Main {
-
-	public static void main(String[] args) {
+	public static boolean isMainFunctionCalled=false;
+	public static void main(String[] args) {	
 		BufferedReader reader=ConsoleReader.readInputFromConsole(System.in);
 		CSVParser.parseLineFromCSV(reader);
-        try {
-        WriteToCSV.writeWordCountToCSV(WordCount.wordCount);
-        }catch(Exception e){
-        	e.getMessage();
-        }
+		String stopWordsFilePath=StopWordsFetcher.readStopWordsFileNameFromProperties();
+		BufferedReader fileReader=StopWordsFetcher.getFileReader(stopWordsFilePath);
+		try {
+			StopWordsFetcher.readStopWordsFromTextFile(fileReader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		WriteToCSV.writeWordCountToCSV(WordCount.wordCount);
+		isMainFunctionCalled=true;
 	}
 }
 

@@ -1,20 +1,22 @@
 package Receiver;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class CSVParser {
+	private CSVParser() {}
+	public static boolean parseLineFromCSVIsCalled=false;
 	public static void parseLineFromCSV(BufferedReader reader)
 	{
 		try {
-            String name = reader.readLine();
-            while(name!=null)
+			String reviewComment = reader.readLine();
+            while(reviewComment!=null)
             {
-                WordCount.countOccuranceOfWord(name);
-                name=reader.readLine();
+                WordCount.countOccuranceOfWord(reviewComment);
+                reviewComment=reader.readLine();
             }
-        } catch (IOException e) {
-            e.getMessage();
+        }catch(Exception e) {
+        	System.out.println(e.getMessage());
         }
+		parseLineFromCSVIsCalled=true;
 	}
 }

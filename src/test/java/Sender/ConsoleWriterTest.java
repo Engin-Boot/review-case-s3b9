@@ -1,4 +1,4 @@
-package com.example.philips;
+package Sender;
 
 public class ConsoleWriterTest {
 
