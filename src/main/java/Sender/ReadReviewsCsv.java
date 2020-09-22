@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class ReadReviewsCsv {
 	
-	public static Integer MatchcolumnLoop(String[] columns,String col, Integer primecolumn) throws NullPointerException {
+	public static Integer MatchcolumnLoop(String[] columns,String col, Integer primecolumn) throws NullPointerException, ColumnNameNotFoundException {
+		
 		
 		for(Integer i=0;i<columns.length;i++)
 		{
@@ -26,6 +27,7 @@ public class ReadReviewsCsv {
 			}
 			
 		}
+		
 		return primecolumn;
 	}
 	
@@ -39,16 +41,19 @@ public class ReadReviewsCsv {
 	public static Integer Columnfilter(String firstrow, String col) throws ColumnNameNotFoundException {
 		String[] columns=firstrow.split(",");
 		Integer primecolumn=(Integer) null; 
-		MatchcolumnLoop(columns, col, primecolumn);
-		
+		primecolumn=MatchcolumnLoop(columns, col, primecolumn);
 		if(primecolumn==null)
 		{
 			throw new ColumnNameNotFoundException("Column Name not Found");
 		}
 		return primecolumn;
-		
 	}
 	
+	public static void addReviewstoList(String row, List<String> Reviews,Integer primecolumn) {
+		String[] data=row.split(",");
+		if(data.length>1)// this part of code excludes empty rows of csv file
+				Reviews.add(data[primecolumn]);
+	}
 	/**
 	 * This function returns the list of reviews
 	 * present under column entered by user
@@ -72,25 +77,17 @@ public class ReadReviewsCsv {
 		primecolumn = Columnfilter(firstrow, col);//used to find the index of column provided in arguments by User
 			
 		while((row = csvReader.readLine())!=null) {
-		String[] data=row.split(",");
-		if(data.length>1)// this part of code excludes empty rows of csv file
-				Reviews.add(data[primecolumn]);
+		addReviewstoList(row, Reviews, primecolumn);
 				
 			}
 		csvReader.close();
 		
-	}catch (ColumnNameNotFoundException e) {
-			//System.out.println("Caught Exception");
-			e.printStackTrace();
-		}
-	catch(FileNotFoundException f) {
-			//System.out.println("Caught Exception");
-			f.printStackTrace();
-		}
-		 
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
 		
 		return Reviews;
-	}
+}
 
 	
 	
