@@ -72,9 +72,11 @@ public class ReadReviewsCsv {
 		primecolumn = Columnfilter(firstrow, col);//used to find the index of column provided in arguments by User
 			
 		while((row = csvReader.readLine())!=null) {
-			ExcludeEmptyRowsOFCSV(Reviews,row,primecolumn);//this is used to remove empty rows of csv file
-		}
-		
+		String[] data=row.split(",");
+		if(data.length>1)// this part of code excludes empty rows of csv file
+				Reviews.add(data[primecolumn]);
+				
+			}
 		csvReader.close();
 		
 	}catch (ColumnNameNotFoundException e) {
@@ -89,17 +91,6 @@ public class ReadReviewsCsv {
 		
 		return Reviews;
 	}
-	
-	public static void ExcludeEmptyRowsOFCSV(List<String> Reviews,String row, Integer primecolumn) {
-		String[] data=row.split(",");
-		if(data.length>1)// this part of code excludes empty rows of csv file
-				Reviews.add(data[primecolumn]);
-				
-			
-	}
-	
-	
-	
 
 	
 	
