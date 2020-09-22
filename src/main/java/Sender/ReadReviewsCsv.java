@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ReadReviewsCsv {
 	
-	public static Integer MatchcolumnLoop(String[] columns,String col, Integer primecolumn) {
+	public static Integer MatchcolumnLoop(String[] columns,String col, Integer primecolumn)throws NullPointerException {
 		
 		for(Integer i=0;i<columns.length;i++)
 		{
