@@ -27,10 +27,7 @@ public class ReadReviewsCsv {
 			}
 			
 		}
-		if(primecolumn==null)
-		{
-			throw new ColumnNameNotFoundException("Column Name not Found");
-		}
+		
 		return primecolumn;
 	}
 	
@@ -45,7 +42,10 @@ public class ReadReviewsCsv {
 		String[] columns=firstrow.split(",");
 		Integer primecolumn=(Integer) null; 
 		primecolumn=MatchcolumnLoop(columns, col, primecolumn);
-		
+		if(primecolumn==null)
+		{
+			throw new ColumnNameNotFoundException("Column Name not Found");
+		}
 		return primecolumn;
 	}
 	
