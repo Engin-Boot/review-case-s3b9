@@ -1,5 +1,6 @@
 package com.example.philips;
 import Sender.ColumnNameNotFoundException;
+
 import Sender.ConsoleWriter;
 
 import Sender.FileFetcher;
@@ -9,6 +10,7 @@ import Sender.ReadReviewsCsv;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,13 +44,14 @@ public class SenderTests {
 	 */
 	@Test
 	public void whenCorrectColumnNameGiven_columnFilterTest_Success_Returns_Column_Number() throws ColumnNameNotFoundException {
-		String firstrow="Calcutta,Bombay,Chennai";
+		String firstrow="Calcutta,Bombay,Chennai"; 
 		String col="Bombay";
 		Integer primecolumn=ReadReviewsCsv.Columnfilter(firstrow, col);
 		Assert.assertEquals(Integer.valueOf(1), primecolumn);
 		
 		
 	}
+	
 	
 	/**
 	 * this test is a negative case
@@ -67,8 +70,22 @@ public class SenderTests {
 		Integer primecolumn=ReadReviewsCsv.Columnfilter(firstrow, col);
 	}
 	
+	@Test(expected=ColumnNameNotFoundException.class)
+	public void reviewCsvParser_ReturnsColumnNameNotfoundException() throws IOException, ColumnNameNotFoundException {
+		List<String> expectedReviews=new ArrayList<String>();
+		expectedReviews.add("Calcutta is nice");
+		
+	    BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+	    String path="src/main/resources/sample.csv";
+	    Mockito.when(bufferedReader.readLine()).thenReturn(path);
+	    List<String> reviews=ReadReviewsCsv.reviewCsvFile_ParsesLinesAndAddsToList(path, "Challenges");
+	  
+	    
+		
+	}
+	
 	/**
-	 * 
+	 * This functions returns review list after parsing the lines and testing for success
 	 * @throws IOException
 	 * @throws ColumnNameNotFoundException 
 	 */
@@ -90,7 +107,10 @@ public class SenderTests {
 	    
 	}
 	
-	
+	/**
+	 * Negative test for file format not being supported
+	 * @throws IOException
+	 */
 	@Test
 	public void fileFetcher_Failure() throws IOException {
 		 ResourceBundle rb=ResourceBundle.getBundle("filepath");
@@ -100,6 +120,10 @@ public class SenderTests {
 		
 	}
 	
+	/**
+	 * FileFetcher successful execution for valid file format and names
+	 * @throws IOException
+	 */
 	@Test
 	public void fileFetcher_Success() throws IOException {
 		 ResourceBundle rb=ResourceBundle.getBundle("filepath");
@@ -120,23 +144,30 @@ public class SenderTests {
 		
 	}
 	
-	@Test(expected=NullPointerException.class)
-	public void whenWrongColumnNameGiven_NullPointerExceptionThrown() throws NullPointerException {
+	/**
+	 * Main method test for ColumnNotFoundException
+	 * @throws ColumnNameNotFoundException
+	 */
+	@Test(expected=ColumnNameNotFoundException.class)
+	public void whenWrongColumnNameGivenInMainArguments_ColumnNameotFoundExceptionThrown() throws ColumnNameNotFoundException{
 		String[] args={"Changes"}; 
 		InputStream stdin=System .in;
-		
 		Main.main(args);
 		System.setIn(stdin);
 		
+		
 	}
 	
-//	@Test
-//	public void TestConsoleWriter() {
-//		List<String> listConsole=new ArrayList<>();
-//		listConsole.add("Calcutta,Bombay");
-//		ConsoleWriter.writeReviewsOnConsole(listConsole);
-//			    
-//	}
+	/**
+	 * This test is for checking console writer
+	 */
+	@Test
+	public void TestConsoleWriter() {
+		List<String> listConsole=new ArrayList<>();
+		listConsole.add("Calcutta,Bombay");
+		ConsoleWriter.writeReviewsOnConsole(listConsole);
+			    
+	}
 
 	
 
