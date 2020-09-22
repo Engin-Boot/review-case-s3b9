@@ -82,18 +82,12 @@ public class ReadReviewsCsv {
 			}
 		csvReader.close();
 		
-	}catch (ColumnNameNotFoundException e) {
-			//System.out.println("Caught Exception");
-			e.printStackTrace();
-		}
-	catch(FileNotFoundException f) {
-			//System.out.println("Caught Exception");
-			f.printStackTrace();
-		}
-		 
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
 		
 		return Reviews;
-	}
+}
 
 	
 	
