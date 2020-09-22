@@ -13,18 +13,9 @@ public class Main {
 		
 		try {
 			reviewsList = ReadReviewsCsv.reviewCsvFile_ParsesLinesAndAddsToList(FileFetcher.readCsvfileNameFromProperties(), args[0]);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch(Exception e){
 			e.printStackTrace();
 		}
-		catch(IOException f) {
-			f.printStackTrace();
-		}
-		catch(ColumnNameNotFoundException col)
-		{
-			col.printStackTrace();
-		}
-		
 		ConsoleWriter.writeReviewsOnConsole(reviewsList);
 		isMainFunctionCalled=true;
 		
