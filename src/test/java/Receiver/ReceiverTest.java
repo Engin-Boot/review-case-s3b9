@@ -88,14 +88,16 @@ public class ReceiverTest {
 		assertEquals(WriteToCSV.str,csvString);
 	}
 	
+	//failing test
 	@Test(expected=NullPointerException.class)
-	public void writeWordCountToCSVTest2() throws FileNotFoundException
+	public void givenStringToWriteAndFilePathCheckFileIsCreatedOrNot() throws FileNotFoundException
 	{
 		File file=new File("//");
 		WriteToCSV.createFileAndWrite(csvString, file);
 	}
 
 
+	//failing tests
 	@Test
 	public void parseLineFromCSVTestForNull() throws IOException{
 		BufferedReader reader = null;
@@ -103,8 +105,9 @@ public class ReceiverTest {
 		assertEquals(CSVParser.parseLineFromCSVIsCalled,isFunctionCalled);
 	}
 	
+	//passing test
 	@Test 
-	public void parseLineFromCSVTestTest(){
+	public void givenOutputInConsoleThenCheckTheAccessibiltyOfConsoleContent(){
 		String data = "Hello World";
 		InputStream stdin = System.in;
 		try {
@@ -132,7 +135,7 @@ public class ReceiverTest {
 	}
 	
 	@Test
-	public void testMain() {
+	public void testToSimulateMainMethod() {
 		String data = "";
 	    String[] args = null;
 	    InputStream stdin = System.in;
