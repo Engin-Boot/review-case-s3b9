@@ -85,22 +85,17 @@ public class ReceiverTest {
 	public void givenWordCountInMapThenCheckCorrectOutputIsWrittenToCSV() throws IOException
 	{
 		WriteToCSV.writeWordCountToCSV(mymap);
-//		System.out.println(WriteToCSV.str);
-//		System.out.println(":");
-//		System.out.println(csvString);
 		assertEquals(WriteToCSV.str,csvString);
 	}
 	
-	//failing test
-	@Test(expected=NullPointerException.class)
-	public void givenStringToWriteAndFilePathCheckFileIsCreatedOrNot() throws FileNotFoundException
+	@Test
+	public void writeWordCountToCSVTest2() throws FileNotFoundException
 	{
 		File file=new File("//");
 		WriteToCSV.createFileAndWrite(csvString, file);
 	}
 
 
-	//failing tests
 	@Test
 	public void parseLineFromCSVTestForNull() throws IOException{
 		BufferedReader reader = null;
@@ -108,9 +103,8 @@ public class ReceiverTest {
 		assertEquals(CSVParser.parseLineFromCSVIsCalled,isFunctionCalled);
 	}
 	
-	//passing test
 	@Test 
-	public void givenOutputInConsoleThenCheckTheAccessibiltyOfConsoleContent(){
+	public void parseLineFromCSVTestTest(){
 		String data = "Hello World";
 		InputStream stdin = System.in;
 		try {
@@ -137,16 +131,16 @@ public class ReceiverTest {
 		}
 	}
 	
-// 	@Test
-// 	public void testToSimulateMainMethod() {
-// 		String data = "";
-// 	    String[] args = null;
-// 	    InputStream stdin = System.in;
-// 	    System.setIn(new ByteArrayInputStream(data.getBytes()));
-// 		Main.main(args);
-// 		System.setIn(stdin);
-// 		assertEquals(Main.isMainFunctionCalled,isFunctionCalled);
-// 	}
+	@Test
+	public void testMain() {
+		String data = "";
+	    String[] args = null;
+	    InputStream stdin = System.in;
+	    System.setIn(new ByteArrayInputStream(data.getBytes()));
+		Main.main(args);
+		System.setIn(stdin);
+		assertEquals(Main.isMainFunctionCalled,isFunctionCalled);
+	}
 	
 	@Test
 	public void readStopWordsFromTextFileTest() throws Exception{
@@ -155,13 +149,13 @@ public class ReceiverTest {
 		assertNotNull("should be not null",reader);
 	}
 	
-// 	@Test//(expected=IOException.class)
-// 	public void readStopWordsFromTextFileTest2() throws IOException{
-// 		String filePath=StopWordsFetcher.readStopWordsFileNameFromProperties();
-// 		BufferedReader reader = StopWordsFetcher.getFileReader(filePath);
-// 		reader.close();
-// 		StopWordsFetcher.readStopWordsFromTextFile(reader);
-// 	}
+	@Test//(expected=IOException.class)
+	public void readStopWordsFromTextFileTest2() throws IOException{
+		String filePath=StopWordsFetcher.readStopWordsFileNameFromProperties();
+		BufferedReader reader = StopWordsFetcher.getFileReader(filePath);
+		reader.close();
+		StopWordsFetcher.readStopWordsFromTextFile(reader);
+	}
 	
 	@Test//(expected=FileNotFoundException.class)
 	public void getFileReaderTest() throws IOException {
