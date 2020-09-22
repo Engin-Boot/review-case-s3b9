@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ReadReviewsCsv {
 	
-	public static Integer MatchcolumnLoop(String[] columns,String col, Integer primecolumn)throws NullPointerException {
+	public static Integer MatchcolumnLoop(String[] columns,String col, Integer primecolumn) throws NullPointerException {
 		
 		for(Integer i=0;i<columns.length;i++)
 		{
@@ -72,11 +72,9 @@ public class ReadReviewsCsv {
 		primecolumn = Columnfilter(firstrow, col);//used to find the index of column provided in arguments by User
 			
 		while((row = csvReader.readLine())!=null) {
-		String[] data=row.split(",");
-		if(data.length>1)// this part of code excludes empty rows of csv file
-				Reviews.add(data[primecolumn]);
-				
-			}
+			ExcludeEmptyRowsOFCSV(Reviews,row,primecolumn);//this is used to remove empty rows of csv file
+		}
+		
 		csvReader.close();
 		
 	}catch (ColumnNameNotFoundException e) {
@@ -91,6 +89,17 @@ public class ReadReviewsCsv {
 		
 		return Reviews;
 	}
+	
+	public static void ExcludeEmptyRowsOFCSV(List<String> Reviews,String row, Integer primecolumn) {
+		String[] data=row.split(",");
+		if(data.length>1)// this part of code excludes empty rows of csv file
+				Reviews.add(data[primecolumn]);
+				
+			
+	}
+	
+	
+	
 
 	
 	
