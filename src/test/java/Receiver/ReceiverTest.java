@@ -88,12 +88,12 @@ public class ReceiverTest {
 		assertEquals(WriteToCSV.str,csvString);
 	}
 	
-//	@Test
-//	public void writeWordCountToCSVTest2() throws FileNotFoundException
-//	{
-//		File file=new File("//");
-//		WriteToCSV.createFileAndWrite(csvString, file);
-//	}
+	@Test(expected=NullPointerException.class)
+	public void writeWordCountToCSVTest2() throws FileNotFoundException
+	{
+		File file=new File("//");
+		WriteToCSV.createFileAndWrite(csvString, file);
+	}
 
 
 	@Test

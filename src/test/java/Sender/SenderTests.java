@@ -1,4 +1,4 @@
-package com.example.philips;
+package Sender;
 import Sender.ColumnNameNotFoundException;
 import Sender.ConsoleWriter;
 
