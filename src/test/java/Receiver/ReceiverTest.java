@@ -85,6 +85,9 @@ public class ReceiverTest {
 	public void givenWordCountInMapThenCheckCorrectOutputIsWrittenToCSV() throws IOException
 	{
 		WriteToCSV.writeWordCountToCSV(mymap);
+//		System.out.println(WriteToCSV.str);
+//		System.out.println(":");
+//		System.out.println(csvString);
 		assertEquals(WriteToCSV.str,csvString);
 	}
 	
