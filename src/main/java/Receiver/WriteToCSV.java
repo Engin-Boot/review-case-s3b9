@@ -1,47 +1,35 @@
 package Receiver;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
+
+import com.opencsv.CSVWriter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class WriteToCSV {
-	private WriteToCSV(){}
-	public static String str="Word,Count\n";
-	public static boolean createFileAndWriteIsCalled=false;
-	public static void createStringForWritingInCSV(Map<String,Integer> wordCount)
-	{
-		StopWordsRemover.removeStopWords(wordCount);
-		Set<String> wordSet=new HashSet<String>(); 
+	public static void writeWordCountToCSV(Map<String,Integer> wordCount) throws IOException{
+		Set<String> wordSet=new TreeSet<String>();
 		wordSet=wordCount.keySet();
-		List<String> wordList=new ArrayList<String>(wordSet);
-		Collections.sort(wordList);
-		for(String word:wordList){
+		
+		List<String[]> data=new ArrayList<String[]>();
+		data.add(new String[] {"Word","Count"});
+		
+		for(String word:wordSet){
 			System.out.println(word +" : "+ wordCount.get(word));
-			str=str+word+","+Integer.toString(wordCount.get(word))+"\n";
+			data.add(new String[] {word,Integer.toString(wordCount.get(word))});
 		}
+		
+		File file = new File("C:\\Users\\Dell\\eclipse-workspace\\com.example.philips\\src\\main\\resources\\" + 
+				"example.csv");
+		FileWriter outputFile=new FileWriter(file);
+		CSVWriter csvWriter=new CSVWriter(outputFile);
+		csvWriter.writeAll(data);
+		csvWriter.close();
 	}
-	public static void createFileAndWrite(String mystr,File file) {
-		PrintWriter pw = null;
-        try {
-            pw = new PrintWriter(file);
-        } catch (FileNotFoundException e) {
-        	e.getMessage();
-            e.printStackTrace();
-        }
-        pw.println(mystr);
-        pw.flush();
-        pw.close();
-        createFileAndWriteIsCalled=true;
-	}
-	public static void writeWordCountToCSV(Map<String,Integer> wordCount) {
-		createStringForWritingInCSV(wordCount);
-		createFileAndWrite(str,new File("Word-Count.csv"));
-	}
+
 }

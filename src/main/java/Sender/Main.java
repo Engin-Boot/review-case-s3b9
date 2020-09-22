@@ -13,7 +13,8 @@ public class Main {
 		
 		try {
 			reviewsList = ReadReviewsCsv.reviewCsvFile_ParsesLinesAndAddsToList(FileFetcher.readCsvfileNameFromProperties(), args[0]);
-		} catch(Exception e){
+		}catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		ConsoleWriter.writeReviewsOnConsole(reviewsList);
