@@ -2,13 +2,13 @@ package Receiver;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 public class WordCount {
+	private WordCount(){}
 	public static Map<String,Integer> wordCount=new HashMap<String,Integer>();
-	public static Set<String> Tokenizer(String review){
-		Set<String> setOfWordsInReview=new TreeSet<String>();
+	public static PriorityQueue<String> Tokenizer(String review){
+		PriorityQueue<String> setOfWordsInReview=new PriorityQueue<String>();
 		StringTokenizer st=new StringTokenizer(review," ");
 		while(st.hasMoreTokens()) {
 			String s=st.nextToken();
@@ -17,10 +17,10 @@ public class WordCount {
 		return setOfWordsInReview;
 	}
 	public static void countOccuranceOfWord(String review) {
-		Set<String> wordSet=new TreeSet<String>();
+		PriorityQueue<String> wordQueue=new PriorityQueue<String>();
 		review=review.replaceAll("[\\p{Punct}&&[^/]]+", "").toLowerCase();
-		wordSet=Tokenizer(review);
-		for(String word:wordSet){
+		wordQueue=Tokenizer(review);
+		for(String word:wordQueue){
 			if(!wordCount.containsKey(word)) {
 				wordCount.put(word, 1);
 			}

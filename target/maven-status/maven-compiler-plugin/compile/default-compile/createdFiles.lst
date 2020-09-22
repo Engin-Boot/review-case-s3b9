@@ -1,4 +1,9 @@
-Sender\Main.class
-Sender\ReadReviewsCsv.class
-Sender\ConsoleWriter.class
+Receiver\CSVParser.class
 Sender\FileFetcher.class
+Receiver\ConsoleReader.class
+Sender\Main.class
+Receiver\WriteToCSV.class
+Sender\ReadReviewsCsv.class
+Receiver\WordCount.class
+Receiver\Main.class
+Sender\ConsoleWriter.class
